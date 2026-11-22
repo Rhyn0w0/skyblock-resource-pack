@@ -2,7 +2,7 @@
 
 # Necron's Handle → Fortnite Pirate Token (Hypixel SkyBlock Resource Pack)
 
-A Hypixel SkyBlock resource pack that turns **Necron's Handle** (`NECRON_HANDLE`) into an animated gold **Fortnite Pirate Token** (Pirate Shop Access doubloon) with a diagonal metallic sheen and sparkle glint.
+A Hypixel SkyBlock resource pack that turns **Necron's Handle** (`NECRON_HANDLE`) into an animated gold **Fortnite Pirate Token** (Pirate Shop Access doubloon) with a diagonal metallic sheen, sparkle glint, and renames its visible text to **Pirate Token** (via Catharsis & Firmament text replacements).
 
 ## Compatibility
 

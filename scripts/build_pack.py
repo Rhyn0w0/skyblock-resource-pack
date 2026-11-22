@@ -415,6 +415,26 @@ def build_all() -> None:
         json.dumps(mcmeta, indent=2) + "\n", encoding="utf-8"
     )
 
+    # Catharsis text replacements (item name/lore + entity nametags)
+    catharsis_text_replacement = {
+        "priority": 0,
+        "replacer": {
+            "type": "catharsis:regex",
+            "regex": "Necron's Handle",
+            "replacement": {
+                "text": "Pirate Token",
+                "color": "gold",
+                "italic": False,
+            },
+        },
+    }
+    for target in ("item", "nametag"):
+        p = ROOT / f"assets/pirate_token/catharsis/text_replacements/{target}/necron_handle.json"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(
+            json.dumps(catharsis_text_replacement, indent=2) + "\n", encoding="utf-8"
+        )
+
     # 4. Firmament (1.20.4 - 1.21.11 - 26.1+)
     firm_item_def = {
         "model": {
@@ -442,6 +462,26 @@ def build_all() -> None:
     firm_tex.with_suffix(".png.mcmeta").write_text(
         json.dumps(mcmeta, indent=2) + "\n", encoding="utf-8"
     )
+
+    # Firmament text override (item name / UI text)
+    firm_text_override = {
+        "match": {
+            "regex": ".*Necron's Handle.*",
+        },
+        "replacements": [
+            {
+                "match": "Necron's Handle",
+                "replace": {
+                    "text": "Pirate Token",
+                    "color": "gold",
+                    "italic": False,
+                },
+            }
+        ],
+    }
+    p = ROOT / "assets/firmskyblock/overrides/texts/necron_handle.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(firm_text_override, indent=2) + "\n", encoding="utf-8")
 
     # 5. OptiFine (1.13 - 1.20.4)
     optifine_dir = ROOT / "assets/minecraft/optifine/cit/necron_handle"
