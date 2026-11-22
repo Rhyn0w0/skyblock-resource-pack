@@ -11,7 +11,30 @@
   },
   "catharsis:pack/v1": {
     "id": "necron_handle_pirate_token",
-    "version": "1.0.0",
+    "version": "1.1.0",
+    "pack_required_for_config": true,
     "override_hypixel_pack": true
+  },
+  "fabric:overlays": {
+    "entries": [
+      {
+        "directory": "texture_official",
+        "condition": {
+          "condition": "catharsis:config",
+          "pack": "necron_handle_pirate_token",
+          "id": "texture_style",
+          "value": "official"
+        }
+      },
+      {
+        "directory": "name_pirate_shop_access_token",
+        "condition": {
+          "condition": "catharsis:config",
+          "pack": "necron_handle_pirate_token",
+          "id": "item_name",
+          "value": "pirate_shop_access_token"
+        }
+      }
+    ]
   }
 }

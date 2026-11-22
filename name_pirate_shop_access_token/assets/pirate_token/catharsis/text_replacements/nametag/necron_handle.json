@@ -1,0 +1,12 @@
+{
+  "priority": 0,
+  "replacer": {
+    "type": "catharsis:regex",
+    "regex": "Necron's Handle",
+    "replacement": {
+      "text": "Pirate Shop Access Token",
+      "color": "gold",
+      "italic": false
+    }
+  }
+}

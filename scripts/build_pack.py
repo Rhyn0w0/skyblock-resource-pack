@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import shutil
 import struct
 import zlib
 import zipfile
@@ -360,7 +361,8 @@ def build_all() -> None:
     tex_w, tex_h, tex_rows, mcmeta = make_animated_strip(base)
     icon_w, icon_h, icon_rows = make_pack_icon(base)
 
-    # 1. pack.mcmeta (compatible with Catharsis, Firmament, CIT Resewn, OptiFine across 1.8.9 - 26.1+)
+    # 1. pack.mcmeta (compatible with Catharsis + config overlays, Firmament, CIT Resewn, OptiFine across 1.8.9 - 26.1+)
+    pack_id = "necron_handle_pirate_token"
     pack_mcmeta = {
         "pack": {
             "pack_format": 1,
@@ -370,13 +372,115 @@ def build_all() -> None:
             "description": "\u00a76Pirate Token \u00a77- Turns \u00a7dNecron's Handle \u00a77into the Fortnite Pirate Token",
         },
         "catharsis:pack/v1": {
-            "id": "necron_handle_pirate_token",
-            "version": "1.0.0",
+            "id": pack_id,
+            "version": "1.1.0",
+            "pack_required_for_config": True,
             "override_hypixel_pack": True,
+        },
+        "fabric:overlays": {
+            "entries": [
+                {
+                    "directory": "texture_official",
+                    "condition": {
+                        "condition": "catharsis:config",
+                        "pack": pack_id,
+                        "id": "texture_style",
+                        "value": "official",
+                    },
+                },
+                {
+                    "directory": "name_pirate_shop_access_token",
+                    "condition": {
+                        "condition": "catharsis:config",
+                        "pack": pack_id,
+                        "id": "item_name",
+                        "value": "pirate_shop_access_token",
+                    },
+                },
+            ]
         },
     }
     (ROOT / "pack.mcmeta").write_text(
         json.dumps(pack_mcmeta, indent=2) + "\n", encoding="utf-8"
+    )
+
+    # 1b. config.catharsis.json (Catharsis settings UI accessible via the cog icon or /catharsis config)
+    catharsis_config = [
+        {
+            "type": "separator",
+            "title": {
+                "text": "Pirate Token Settings",
+                "color": "gold",
+                "bold": True,
+            },
+            "description": {
+                "text": "Customize Necron's Handle texture and visible display name.",
+                "color": "gray",
+            },
+        },
+        {
+            "type": "dropdown",
+            "id": "texture_style",
+            "title": {"text": "Texture Style"},
+            "description": {
+                "text": "Choose between the custom animated pixel-art coin or the official Fortnite Pirate Token image.",
+                "color": "gray",
+            },
+            "descriptions": {
+                "pixel": {
+                    "text": "Custom 32x32 animated gold pirate doubloon pixel art.",
+                    "color": "gray",
+                },
+                "official": {
+                    "text": "Official Fortnite Treasure Hunters Pirate Token image (256x256).",
+                    "color": "gray",
+                },
+            },
+            "options": [
+                {
+                    "value": "pixel",
+                    "text": {"text": "Pixel Art"},
+                    "default": True,
+                },
+                {
+                    "value": "official",
+                    "text": {"text": "Official Fortnite"},
+                },
+            ],
+        },
+        {
+            "type": "dropdown",
+            "id": "item_name",
+            "title": {"text": "Display Name"},
+            "description": {
+                "text": "Choose the visible name shown for Necron's Handle.",
+                "color": "gray",
+            },
+            "descriptions": {
+                "pirate_token": {
+                    "text": "Renames Necron's Handle to Pirate Token.",
+                    "color": "gold",
+                },
+                "pirate_shop_access_token": {
+                    "text": "Renames Necron's Handle to Pirate Shop Access Token.",
+                    "color": "gold",
+                },
+            },
+            "options": [
+                {
+                    "value": "pirate_token",
+                    "text": {"text": "Pirate Token"},
+                    "default": True,
+                },
+                {
+                    "value": "pirate_shop_access_token",
+                    "text": {"text": "Pirate Shop Access Token"},
+                },
+            ],
+        },
+    ]
+    (ROOT / "config.catharsis.json").write_text(
+        json.dumps(catharsis_config, indent=2) + "\n", encoding="utf-8"
     )
 
     # 2. pack.png
@@ -389,10 +493,22 @@ def build_all() -> None:
             "model": "pirate_token:item/necron_handle",
         }
     }
+    catharsis_item_def_official = {
+        "model": {
+            "type": "minecraft:model",
+            "model": "pirate_token:item/necron_handle_official",
+        }
+    }
     catharsis_model = {
         "parent": "minecraft:item/generated",
         "textures": {
             "layer0": "pirate_token:item/necron_handle",
+        },
+    }
+    catharsis_model_official = {
+        "parent": "minecraft:item/generated",
+        "textures": {
+            "layer0": "pirate_token:item/necron_handle_official",
         },
     }
 
@@ -409,31 +525,79 @@ def build_all() -> None:
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(catharsis_model, indent=2) + "\n", encoding="utf-8")
 
+    p = ROOT / "assets/pirate_token/models/item/necron_handle_official.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(catharsis_model_official, indent=2) + "\n", encoding="utf-8")
+
     catharsis_tex = ROOT / "assets/pirate_token/textures/item/necron_handle.png"
     write_png(catharsis_tex, tex_w, tex_h, tex_rows)
     catharsis_tex.with_suffix(".png.mcmeta").write_text(
         json.dumps(mcmeta, indent=2) + "\n", encoding="utf-8"
     )
 
-    # Catharsis text replacements (item name/lore + entity nametags)
-    catharsis_text_replacement = {
-        "priority": 0,
-        "replacer": {
-            "type": "catharsis:regex",
-            "regex": "Necron's Handle",
-            "replacement": {
-                "text": "Pirate Token",
-                "color": "gold",
-                "italic": False,
+    official_src = ROOT / "scripts/official_pirate_token.png"
+    if not official_src.exists():
+        raise FileNotFoundError(f"Missing official Fortnite Pirate Token texture at {official_src}")
+    official_dst = ROOT / "assets/pirate_token/textures/item/necron_handle_official.png"
+    official_dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(official_src, official_dst)
+
+    def write_catharsis_text_replacements(base_dir: Path, display_name: str) -> None:
+        rep = {
+            "priority": 0,
+            "replacer": {
+                "type": "catharsis:regex",
+                "regex": "Necron's Handle",
+                "replacement": {
+                    "text": display_name,
+                    "color": "gold",
+                    "italic": False,
+                },
             },
-        },
-    }
-    for target in ("item", "nametag"):
-        p = ROOT / f"assets/pirate_token/catharsis/text_replacements/{target}/necron_handle.json"
-        p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(
-            json.dumps(catharsis_text_replacement, indent=2) + "\n", encoding="utf-8"
+        }
+        for target in ("item", "nametag"):
+            out = base_dir / f"assets/pirate_token/catharsis/text_replacements/{target}/necron_handle.json"
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(json.dumps(rep, indent=2) + "\n", encoding="utf-8")
+
+    def write_firmament_text_override(base_dir: Path, display_name: str) -> None:
+        override = {
+            "match": {
+                "regex": ".*Necron's Handle.*",
+            },
+            "replacements": [
+                {
+                    "match": "Necron's Handle",
+                    "replace": {
+                        "text": display_name,
+                        "color": "gold",
+                        "italic": False,
+                    },
+                }
+            ],
+        }
+        out = base_dir / "assets/firmskyblock/overrides/texts/necron_handle.json"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(override, indent=2) + "\n", encoding="utf-8")
+
+    # Default text replacements ("Pirate Token")
+    write_catharsis_text_replacements(ROOT, "Pirate Token")
+
+    # Overlay 1: Official Fortnite Pirate Token texture
+    for ns in ("skyblock", "hypixel_skyblock", "firmskyblock"):
+        out = ROOT / f"texture_official/assets/{ns}/items/necron_handle.json"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(
+            json.dumps(catharsis_item_def_official, indent=2) + "\n", encoding="utf-8"
         )
+
+    # Overlay 2: "Pirate Shop Access Token" display name
+    write_catharsis_text_replacements(
+        ROOT / "name_pirate_shop_access_token", "Pirate Shop Access Token"
+    )
+    write_firmament_text_override(
+        ROOT / "name_pirate_shop_access_token", "Pirate Shop Access Token"
+    )
 
     # 4. Firmament (1.20.4 - 1.21.11 - 26.1+)
     firm_item_def = {
@@ -463,25 +627,7 @@ def build_all() -> None:
         json.dumps(mcmeta, indent=2) + "\n", encoding="utf-8"
     )
 
-    # Firmament text override (item name / UI text)
-    firm_text_override = {
-        "match": {
-            "regex": ".*Necron's Handle.*",
-        },
-        "replacements": [
-            {
-                "match": "Necron's Handle",
-                "replace": {
-                    "text": "Pirate Token",
-                    "color": "gold",
-                    "italic": False,
-                },
-            }
-        ],
-    }
-    p = ROOT / "assets/firmskyblock/overrides/texts/necron_handle.json"
-    p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(firm_text_override, indent=2) + "\n", encoding="utf-8")
+    write_firmament_text_override(ROOT, "Pirate Token")
 
     # 5. OptiFine (1.13 - 1.20.4)
     optifine_dir = ROOT / "assets/minecraft/optifine/cit/necron_handle"
@@ -542,10 +688,16 @@ def build_all() -> None:
     include_paths = [
         ROOT / "pack.mcmeta",
         ROOT / "pack.png",
+        ROOT / "config.catharsis.json",
     ]
     for ns in ("skyblock", "hypixel_skyblock", "pirate_token", "firmskyblock", "minecraft"):
         ns_dir = ROOT / "assets" / ns
         for f in sorted(ns_dir.rglob("*")):
+            if f.is_file():
+                include_paths.append(f)
+    for overlay in ("texture_official", "name_pirate_shop_access_token"):
+        ov_dir = ROOT / overlay
+        for f in sorted(ov_dir.rglob("*")):
             if f.is_file():
                 include_paths.append(f)
 

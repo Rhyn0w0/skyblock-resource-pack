@@ -1,0 +1,15 @@
+{
+  "match": {
+    "regex": ".*Necron's Handle.*"
+  },
+  "replacements": [
+    {
+      "match": "Necron's Handle",
+      "replace": {
+        "text": "Pirate Shop Access Token",
+        "color": "gold",
+        "italic": false
+      }
+    }
+  ]
+}

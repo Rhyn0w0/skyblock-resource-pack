@@ -1,0 +1,86 @@
+[
+  {
+    "type": "separator",
+    "title": {
+      "text": "Pirate Token Settings",
+      "color": "gold",
+      "bold": true
+    },
+    "description": {
+      "text": "Customize Necron's Handle texture and visible display name.",
+      "color": "gray"
+    }
+  },
+  {
+    "type": "dropdown",
+    "id": "texture_style",
+    "title": {
+      "text": "Texture Style"
+    },
+    "description": {
+      "text": "Choose between the custom animated pixel-art coin or the official Fortnite Pirate Token image.",
+      "color": "gray"
+    },
+    "descriptions": {
+      "pixel": {
+        "text": "Custom 32x32 animated gold pirate doubloon pixel art.",
+        "color": "gray"
+      },
+      "official": {
+        "text": "Official Fortnite Treasure Hunters Pirate Token image (256x256).",
+        "color": "gray"
+      }
+    },
+    "options": [
+      {
+        "value": "pixel",
+        "text": {
+          "text": "Pixel Art"
+        },
+        "default": true
+      },
+      {
+        "value": "official",
+        "text": {
+          "text": "Official Fortnite"
+        }
+      }
+    ]
+  },
+  {
+    "type": "dropdown",
+    "id": "item_name",
+    "title": {
+      "text": "Display Name"
+    },
+    "description": {
+      "text": "Choose the visible name shown for Necron's Handle.",
+      "color": "gray"
+    },
+    "descriptions": {
+      "pirate_token": {
+        "text": "Renames Necron's Handle to Pirate Token.",
+        "color": "gold"
+      },
+      "pirate_shop_access_token": {
+        "text": "Renames Necron's Handle to Pirate Shop Access Token.",
+        "color": "gold"
+      }
+    },
+    "options": [
+      {
+        "value": "pirate_token",
+        "text": {
+          "text": "Pirate Token"
+        },
+        "default": true
+      },
+      {
+        "value": "pirate_shop_access_token",
+        "text": {
+          "text": "Pirate Shop Access Token"
+        }
+      }
+    ]
+  }
+]
