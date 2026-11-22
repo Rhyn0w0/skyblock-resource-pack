@@ -360,15 +360,20 @@ def build_all() -> None:
     tex_w, tex_h, tex_rows, mcmeta = make_animated_strip(base)
     icon_w, icon_h, icon_rows = make_pack_icon(base)
 
-    # 1. pack.mcmeta (compatible with 1.8.9, 1.20.2-1.21.8, and 1.21.9-26.1+)
+    # 1. pack.mcmeta (compatible with Catharsis, Firmament, CIT Resewn, OptiFine across 1.8.9 - 26.1+)
     pack_mcmeta = {
         "pack": {
             "pack_format": 1,
-            "supported_formats": [1, 99],
+            "supported_formats": [1, 255],
             "min_format": 1,
-            "max_format": 99,
+            "max_format": 255,
             "description": "\u00a76Pirate Token \u00a77- Turns \u00a7dNecron's Handle \u00a77into the Fortnite Pirate Token",
-        }
+        },
+        "catharsis:pack/v1": {
+            "id": "necron_handle_pirate_token",
+            "version": "1.0.0",
+            "override_hypixel_pack": True,
+        },
     }
     (ROOT / "pack.mcmeta").write_text(
         json.dumps(pack_mcmeta, indent=2) + "\n", encoding="utf-8"
@@ -377,7 +382,35 @@ def build_all() -> None:
     # 2. pack.png
     write_png(ROOT / "pack.png", icon_w, icon_h, icon_rows)
 
-    # 3. Firmament (1.20.4 - 1.21.11 - 26.1+)
+    # 3. Catharsis (FurfSky Reborn v2.0+ / modern Hypixel SkyBlock: 1.21.4 - 26.1+)
+    catharsis_item_def = {
+        "model": {
+            "type": "minecraft:model",
+            "model": "pirate_token:item/necron_handle",
+        }
+    }
+    catharsis_model = {
+        "parent": "minecraft:item/generated",
+        "textures": {
+            "layer0": "pirate_token:item/necron_handle",
+        },
+    }
+
+    p = ROOT / "assets/skyblock/items/necron_handle.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(catharsis_item_def, indent=2) + "\n", encoding="utf-8")
+
+    p = ROOT / "assets/pirate_token/models/item/necron_handle.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(catharsis_model, indent=2) + "\n", encoding="utf-8")
+
+    catharsis_tex = ROOT / "assets/pirate_token/textures/item/necron_handle.png"
+    write_png(catharsis_tex, tex_w, tex_h, tex_rows)
+    catharsis_tex.with_suffix(".png.mcmeta").write_text(
+        json.dumps(mcmeta, indent=2) + "\n", encoding="utf-8"
+    )
+
+    # 4. Firmament (1.20.4 - 1.21.11 - 26.1+)
     firm_item_def = {
         "model": {
             "type": "minecraft:model",
@@ -405,7 +438,7 @@ def build_all() -> None:
         json.dumps(mcmeta, indent=2) + "\n", encoding="utf-8"
     )
 
-    # 4. OptiFine (1.13 - 1.20.4)
+    # 5. OptiFine (1.13 - 1.20.4)
     optifine_dir = ROOT / "assets/minecraft/optifine/cit/necron_handle"
     optifine_dir.mkdir(parents=True, exist_ok=True)
     write_png(optifine_dir / "necron_handle.png", tex_w, tex_h, tex_rows)
@@ -420,7 +453,7 @@ def build_all() -> None:
         encoding="utf-8",
     )
 
-    # 5. CIT Resewn (1.20.5 - 1.21.1 data components)
+    # 6. CIT Resewn (1.20.5 - 1.21.1 data components)
     citresewn_dir = ROOT / "assets/minecraft/citresewn/cit/necron_handle"
     citresewn_dir.mkdir(parents=True, exist_ok=True)
     write_png(citresewn_dir / "necron_handle.png", tex_w, tex_h, tex_rows)
@@ -435,7 +468,7 @@ def build_all() -> None:
         encoding="utf-8",
     )
 
-    # 6. Legacy OptiFine / MCPatcher (1.8.9)
+    # 7. Legacy OptiFine / MCPatcher (1.8.9)
     mcpatcher_dir = ROOT / "assets/minecraft/mcpatcher/cit/necron_handle"
     mcpatcher_dir.mkdir(parents=True, exist_ok=True)
     write_png(mcpatcher_dir / "necron_handle.png", tex_w, tex_h, tex_rows)
@@ -458,14 +491,14 @@ def build_all() -> None:
             preview_rows.append(expanded)
     write_png(ROOT / "dist/preview_token.png", 256, 256, preview_rows)
 
-    # 7. Package a clean ready-to-install .zip in dist/
+    # 8. Package a clean ready-to-install .zip in dist/
     zip_path = ROOT / "dist/NecronHandle-PirateToken.zip"
     zip_path.parent.mkdir(parents=True, exist_ok=True)
     include_paths = [
         ROOT / "pack.mcmeta",
         ROOT / "pack.png",
     ]
-    for ns in ("firmskyblock", "minecraft"):
+    for ns in ("skyblock", "pirate_token", "firmskyblock", "minecraft"):
         ns_dir = ROOT / "assets" / ns
         for f in sorted(ns_dir.rglob("*")):
             if f.is_file():

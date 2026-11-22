@@ -6,10 +6,11 @@ A Hypixel SkyBlock resource pack that turns **Necron's Handle** (`NECRON_HANDLE`
 
 ## Compatibility
 
-Works out of the box with every major Hypixel SkyBlock custom-item setup:
+Works out of the box with **Catharsis** (used by FurfSky Reborn v2.0+) as well as Firmament, CIT Resewn, and OptiFine:
 
 | Minecraft Version | Mod | Pack Paths Used |
 | --- | --- | --- |
+| **1.21.4 – 1.21.11 / 26.1+** | **Catharsis** *(FurfSky Reborn v2.0+)* | `assets/skyblock/items/necron_handle.json` → `pirate_token:item/necron_handle` (`catharsis:pack/v1`) |
 | **1.20.4 – 1.21.11 / 26.1+** | **Firmament** | `assets/firmskyblock/items/necron_handle.json`, `assets/firmskyblock/models/item/necron_handle.json` |
 | **1.20.5 – 1.21.1** | **CIT Resewn** | `assets/minecraft/citresewn/cit/necron_handle/necron_handle.properties` |
 | **1.13 – 1.20.4** | **OptiFine** | `assets/minecraft/optifine/cit/necron_handle/necron_handle.properties` |
@@ -17,13 +18,13 @@ Works out of the box with every major Hypixel SkyBlock custom-item setup:
 
 ## Installation
 
-1. Copy [`dist/NecronHandle-PirateToken.zip`](dist/NecronHandle-PirateToken.zip) into your Minecraft `resourcepacks/` folder (or copy this repository folder directly).
+1. Download [`dist/NecronHandle-PirateToken.zip`](https://github.com/Rhyn0w0/skyblock-resource-pack/raw/main/dist/NecronHandle-PirateToken.zip) and drop it directly into your Minecraft `resourcepacks/` folder (do **not** use GitHub's "Download ZIP" without extracting the inner folder first, as Minecraft requires `pack.mcmeta` at the pack root).
 2. In Minecraft, go to **Options → Resource Packs** and enable **NecronHandle-PirateToken**.
-3. Make sure this pack is placed **above** full SkyBlock packs like FurfSky Reborn so it overrides Necron's Handle cleanly.
+3. Place this pack **above** FurfSky Reborn (or other full SkyBlock packs) so it overrides Necron's Handle cleanly.
 
 ## Testing in Singleplayer
 
-- **1.20.5+ / 1.21+ / 26.1+ (with Firmament or CIT Resewn):**
+- **1.20.5+ / 1.21+ / 26.1+ (with Catharsis, Firmament, or CIT Resewn):**
   ```mcfunction
   /give @s minecraft:stick[minecraft:custom_data={id:"NECRON_HANDLE"},minecraft:enchantment_glint_override=true]
   ```
