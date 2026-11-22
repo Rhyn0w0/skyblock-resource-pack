@@ -400,6 +400,11 @@ def build_all() -> None:
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(catharsis_item_def, indent=2) + "\n", encoding="utf-8")
 
+    # Also override Hypixel's official server pack namespace (`hypixel_skyblock`)
+    p = ROOT / "assets/hypixel_skyblock/items/necron_handle.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(catharsis_item_def, indent=2) + "\n", encoding="utf-8")
+
     p = ROOT / "assets/pirate_token/models/item/necron_handle.json"
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(catharsis_model, indent=2) + "\n", encoding="utf-8")
@@ -498,7 +503,7 @@ def build_all() -> None:
         ROOT / "pack.mcmeta",
         ROOT / "pack.png",
     ]
-    for ns in ("skyblock", "pirate_token", "firmskyblock", "minecraft"):
+    for ns in ("skyblock", "hypixel_skyblock", "pirate_token", "firmskyblock", "minecraft"):
         ns_dir = ROOT / "assets" / ns
         for f in sorted(ns_dir.rglob("*")):
             if f.is_file():

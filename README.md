@@ -11,6 +11,7 @@ Works out of the box with **Catharsis** (used by FurfSky Reborn v2.0+) as well a
 | Minecraft Version | Mod | Pack Paths Used |
 | --- | --- | --- |
 | **1.21.4 – 1.21.11 / 26.1+** | **Catharsis** *(FurfSky Reborn v2.0+)* | `assets/skyblock/items/necron_handle.json` → `pirate_token:item/necron_handle` (`catharsis:pack/v1`) |
+| **1.21.4 – 1.21.11 / 26.1+** | **Vanilla / Hypixel Server Pack** | `assets/hypixel_skyblock/items/necron_handle.json` → `pirate_token:item/necron_handle` |
 | **1.20.4 – 1.21.11 / 26.1+** | **Firmament** | `assets/firmskyblock/items/necron_handle.json`, `assets/firmskyblock/models/item/necron_handle.json` |
 | **1.20.5 – 1.21.1** | **CIT Resewn** | `assets/minecraft/citresewn/cit/necron_handle/necron_handle.properties` |
 | **1.13 – 1.20.4** | **OptiFine** | `assets/minecraft/optifine/cit/necron_handle/necron_handle.properties` |
