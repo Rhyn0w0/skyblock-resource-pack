@@ -1,0 +1,12 @@
+{
+  "priority": 0,
+  "replacer": {
+    "type": "catharsis:regex",
+    "regex": "Wither Catalyst",
+    "replacement": {
+      "text": "Sprite Dust",
+      "color": "aqua",
+      "italic": false
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "priority": 0,
+  "replacer": {
+    "type": "catharsis:regex",
+    "regex": "(?m)^Implosion$",
+    "replacement": {
+      "text": "Golden Firework",
+      "color": "gold",
+      "italic": false
+    }
+  }
+}

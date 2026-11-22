@@ -1,0 +1,12 @@
+{
+  "priority": 0,
+  "replacer": {
+    "type": "catharsis:regex",
+    "regex": "(?m)^Shadow Warp$",
+    "replacement": {
+      "text": "Portable Extractor",
+      "color": "gold",
+      "italic": false
+    }
+  }
+}

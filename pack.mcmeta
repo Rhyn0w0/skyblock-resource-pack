@@ -7,11 +7,11 @@
     ],
     "min_format": 1,
     "max_format": 255,
-    "description": "\u00a76Pirate Token \u00a77- Turns \u00a7dNecron's Handle \u00a77into the Fortnite Pirate Token"
+    "description": "\u00a76Pirate Token \u00a77- Floor 7 \u00d7 Fortnite Treasure Hunters"
   },
   "catharsis:pack/v1": {
     "id": "necron_handle_pirate_token",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "pack_required_for_config": true,
     "override_hypixel_pack": true
   },
@@ -33,6 +33,49 @@
           "pack": "necron_handle_pirate_token",
           "id": "item_name",
           "value": "pirate_shop_access_token"
+        }
+      },
+      {
+        "directory": "f7_gizmos",
+        "condition": {
+          "condition": "catharsis:config",
+          "pack": "necron_handle_pirate_token",
+          "id": "f7_gizmos"
+        }
+      },
+      {
+        "directory": "f7_gizmos_official",
+        "condition": {
+          "condition": "fabric:and",
+          "values": [
+            {
+              "condition": "catharsis:config",
+              "pack": "necron_handle_pirate_token",
+              "id": "f7_gizmos"
+            },
+            {
+              "condition": "catharsis:config",
+              "pack": "necron_handle_pirate_token",
+              "id": "texture_style",
+              "value": "official"
+            }
+          ]
+        }
+      },
+      {
+        "directory": "f7_gizmo_names",
+        "condition": {
+          "condition": "catharsis:config",
+          "pack": "necron_handle_pirate_token",
+          "id": "f7_gizmo_names"
+        }
+      },
+      {
+        "directory": "enchantment_sprites",
+        "condition": {
+          "condition": "catharsis:config",
+          "pack": "necron_handle_pirate_token",
+          "id": "enchantment_sprites"
         }
       }
     ]

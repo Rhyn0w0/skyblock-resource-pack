@@ -1,0 +1,12 @@
+{
+  "priority": 0,
+  "replacer": {
+    "type": "catharsis:regex",
+    "regex": "Precursor Gear",
+    "replacement": {
+      "text": "Sprite Locator",
+      "color": "gold",
+      "italic": false
+    }
+  }
+}

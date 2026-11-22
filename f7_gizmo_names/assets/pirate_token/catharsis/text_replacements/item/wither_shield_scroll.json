@@ -1,0 +1,12 @@
+{
+  "priority": 0,
+  "replacer": {
+    "type": "catharsis:regex",
+    "regex": "(?m)^Wither Shield$",
+    "replacement": {
+      "text": "Extraction Site Booster",
+      "color": "gold",
+      "italic": false
+    }
+  }
+}

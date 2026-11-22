@@ -2,12 +2,12 @@
   {
     "type": "separator",
     "title": {
-      "text": "Pirate Token Settings",
+      "text": "Necron's Handle (Pirate Token)",
       "color": "gold",
       "bold": true
     },
     "description": {
-      "text": "Customize Necron's Handle texture and visible display name.",
+      "text": "Customize the Pirate Token texture and visible name.",
       "color": "gray"
     }
   },
@@ -18,16 +18,16 @@
       "text": "Texture Style"
     },
     "description": {
-      "text": "Choose between the custom animated pixel-art coin or the official Fortnite Pirate Token image.",
+      "text": "Choose between custom animated pixel art or official Fortnite Treasure Hunters icons.",
       "color": "gray"
     },
     "descriptions": {
       "pixel": {
-        "text": "Custom 32x32 animated gold pirate doubloon pixel art.",
+        "text": "Custom 32x32 animated pixel art for Pirate Token & Gizmos.",
         "color": "gray"
       },
       "official": {
-        "text": "Official Fortnite Treasure Hunters Pirate Token image (256x256).",
+        "text": "Official high-res Fortnite Treasure Hunters images where available.",
         "color": "gray"
       }
     },
@@ -51,7 +51,7 @@
     "type": "dropdown",
     "id": "item_name",
     "title": {
-      "text": "Display Name"
+      "text": "Handle Display Name"
     },
     "description": {
       "text": "Choose the visible name shown for Necron's Handle.",
@@ -59,11 +59,11 @@
     },
     "descriptions": {
       "pirate_token": {
-        "text": "Renames Necron's Handle to Pirate Token.",
+        "text": "Displays as Pirate Token.",
         "color": "gold"
       },
       "pirate_shop_access_token": {
-        "text": "Renames Necron's Handle to Pirate Shop Access Token.",
+        "text": "Displays as Pirate Shop Access Token.",
         "color": "gold"
       }
     },
@@ -82,5 +82,53 @@
         }
       }
     ]
+  },
+  {
+    "type": "separator",
+    "title": {
+      "text": "Floor 7 Gizmos & Sprites",
+      "color": "aqua",
+      "bold": true
+    },
+    "description": {
+      "text": "Turn other Floor 7 drops into Fortnite Gizmos and Enchanted Books into Sprites.",
+      "color": "gray"
+    }
+  },
+  {
+    "type": "boolean",
+    "id": "f7_gizmos",
+    "title": {
+      "text": "Floor 7 Gizmo Drops"
+    },
+    "description": {
+      "text": "Implosion -> Golden Firework, Shadow Warp -> Portable Extractor, Wither Shield -> Extraction Site Booster, Auto Recomb -> Lucky Locator, Precursor Gear -> Sprite Locator, Wither Catalyst -> Sprite Dust.",
+      "color": "gray"
+    },
+    "default": true
+  },
+  {
+    "type": "boolean",
+    "id": "f7_gizmo_names",
+    "title": {
+      "text": "Rename Gizmo Drops"
+    },
+    "description": {
+      "text": "Also rename those Floor 7 drops to their matching Fortnite Gizmo names.",
+      "color": "gray"
+    },
+    "default": false
+  },
+  {
+    "type": "boolean",
+    "id": "enchantment_sprites",
+    "title": {
+      "text": "Enchanted Book Sprites"
+    },
+    "description": {
+      "text": "Turns Floor 7 & Dungeon Enchanted Books (One For All, Soul Eater, Feather Falling, Rejuvenate, Bank, Ultimate Wise, Wisdom, Ultimate Jerry, Legion, Swarm, Combo, etc.) into matching official Fortnite Sprites.",
+      "color": "gray"
+    },
+    "default": true
   }
 ]

@@ -1,0 +1,12 @@
+{
+  "priority": 0,
+  "replacer": {
+    "type": "catharsis:regex",
+    "regex": "Auto Recombobulator",
+    "replacement": {
+      "text": "Lucky Locator",
+      "color": "gold",
+      "italic": false
+    }
+  }
+}
