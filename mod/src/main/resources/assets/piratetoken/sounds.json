@@ -1,0 +1,11 @@
+{
+  "pirate_token_drop": {
+    "subtitle": "Pirate Token Drop Fanfare",
+    "sounds": [
+      {
+        "name": "piratetoken:pirate_token_drop",
+        "stream": false
+      }
+    ]
+  }
+}

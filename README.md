@@ -58,8 +58,30 @@ Click the cog icon on this pack in **Options → Resource Packs** (or run `/cath
 3. Place this pack **above** FurfSky Reborn (or other full SkyBlock packs) so it takes priority.
 4. Click the cog icon next to the pack to customize Texture Style, Display Name, Gizmos, and Enchanted Book Sprites.
 
-## Rebuilding Textures & Zip
+## Companion Fabric Mod (Pirate Token Rare Drop Animation — MC 26.2)
+
+Want the full **Fortnite "YOU FOUND PIRATE SHOP ACCESS!"** screen animation + golden sunburst + confetti burst + pirate jackpot fanfare whenever you pull a rare drop in Hypixel SkyBlock?
+
+1. Download [`dist/pirate-token-drop-mod-1.0.0+mc26.2.jar`](https://github.com/Rhyn0w0/skyblock-resource-pack/raw/main/dist/pirate-token-drop-mod-1.0.0+mc26.2.jar) and drop it into your Minecraft `mods/` folder (built for **Fabric 26.2**, matching SkyBlock Enhanced 5.4.9 + Fabric API).
+2. Triggers automatically on:
+   - All SkyBlock RNG chat drops (`RARE DROP!`, `VERY RARE DROP!`, `CRAZY RARE DROP!`, `INSANE DROP!`, `PRAY TO RNGESUS DROP!`, `RNGESUS INCARNATE!`, `EXTRAORDINARY DROP!`, `PET DROP!`, `DYE DROP!`, and your own Dungeon `RARE REWARD!` drops)
+   - Opening a **Dungeon Reward Chest** (Wood → Bedrock Chest) containing a rare drop (Necron's Handle, Wither Scrolls, Auto Recombobulator, Dark Claymore, Giant's Sword, Master Stars, etc.) — renders right on top of the chest GUI!
+3. Client commands:
+   - `/piratetoken test [item]` — Preview the animation & fanfare sound anytime
+   - `/piratetoken toggle` — Enable/disable the animation
+   - `/piratetoken sound` — Toggle the custom jackpot fanfare sound
+   - `/piratetoken style <official|pixel>` — Switch between the official Fortnite Pirate Token and custom pixel-art coin
+   - `/piratetoken banner <access|token>` — Switch headline between `YOU FOUND PIRATE SHOP ACCESS!` and `PIRATE TOKEN FOUND!`
+   - `/piratetoken mode <all|f7|handle>` — Filter triggers to all rare drops, Floor 7/M7 only, or Necron's Handle only
+   - `/piratetoken chest` — Toggle instant trigger when opening Dungeon Reward Chests
+   - `/piratetoken party` — Toggle triggering on other players' dungeon `RARE REWARD!` announcements
+
+## Rebuilding Textures, Zip & Mod
 
 ```bash
+# Resource pack
 python3 scripts/build_pack.py
+
+# Fabric 26.2 mod (requires JDK 25)
+cd mod && ./gradlew build
 ```

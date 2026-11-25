@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "piratetoken",
+  "version": "${version}",
+  "name": "Pirate Token Drop Animation",
+  "description": "Plays the Fortnite Treasure Hunters Pirate Shop Access Token celebration animation & fanfare whenever you get a rare drop in Hypixel SkyBlock!",
+  "authors": [
+    "Rhyn0w0"
+  ],
+  "license": "MIT",
+  "environment": "client",
+  "icon": "assets/piratetoken/icon.png",
+  "entrypoints": {
+    "client": [
+      "com.rhyn0w0.piratetoken.PirateTokenMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "26.2.x",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
